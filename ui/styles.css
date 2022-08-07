@@ -1,3 +1,7 @@
+p {
+    color:#39FF14;
+}
+
 .task-container {
     height: 100%;
     display: flex;
