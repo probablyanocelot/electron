@@ -1,38 +1,27 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, screen } = require('electron')
+const { app, BrowserWindow } = require('electron')
 const path = require('path')
 
 
+// let display = mainWindow.screen.getPrimaryDisplay();
+// let width = display.bounds.width;
+
+
 const createWindow = () => {
-    const {width,height} = screen.getPrimaryDisplay().workAreaSize;
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 700,
     height: 150,
-    x: width - 700,
-    y: height - 150,
-
+    // x: width - 700,
+    // y: 0,
     transparent:true,
     frame: false,
-    useContentSize: true,
-    resizable: true,
-
-    visibleOnAllWorkspaces: true,
-
     webPreferences: {
-        nodeIntegration: true,
-        enableRemoteModule: true,
-        preload: path.join(__dirname, 'preload.js'),
-      }
+      preload: path.join(__dirname, 'preload.js')
+    }
   })
 
-  app.on('display-metrics-changed', (event, display, changedMetrics) =>
-  {
-    // console.log(display, changedMetrics);
-    const {x, y, width, height} = display.workArea;
-    // console.log(x, y, width, height);
-    mainWindow.setBounds({x: width - 500, y: height - 450, width: 500, height: 500})
-  });
+  // mainWindow.setPosition(500,0)
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
